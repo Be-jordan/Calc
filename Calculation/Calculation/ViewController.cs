@@ -1,20 +1,28 @@
-﻿using System;
+using System;
 using CoreGraphics;
+using System.Drawing;
 using UIKit;
+using CoreGraphics;
 
 namespace Calculation
 {
 	public partial class ViewController : UIViewController
 	{
-		public UITextField number1;
-		public UITextField number2;
+		private UITextField _number1;
+		private UITextField _number2;
 
-		public UIButton Plus;
-		public UIButton Minus;
-		public UIButton Multiply;
-		public UIButton Divide;
+		private UIButton _plus;
+		private UIButton _minus;
+		private UIButton _multiply;
+		private UIButton _divide;
+		private UIButton _clear;
 
-		public UILabel result;
+		private UILabel _result;
+
+		private CGColor _buttonBackgroundColor = UIColor.DarkGray.CGColor;
+
+		private const int _borderWidth = 1;
+		private const int _cornerRadius = 3;
 
 		protected ViewController(IntPtr handle) : base(handle)
 		{
@@ -32,121 +40,168 @@ namespace Calculation
 			SetMinus();
 			SetMultiply();
 			SetDivide();
+			SetClear();
 
 			SetResult();
 
-			Plus.TouchUpInside += add_calc;
-			Minus.TouchUpInside += minus_calc;
-			Multiply.TouchUpInside += multiply_calc;
-			Divide.TouchUpInside += divide_calc;
+			_plus.TouchUpInside += AddCalc;
+			_minus.TouchUpInside += MinusCalc;
+			_multiply.TouchUpInside += MultiplyCalc;
+			_divide.TouchUpInside += DivideCalc;
+			_clear.TouchUpInside += Clear;
 
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
 
-		public void add_calc(Object sender, EventArgs e)
+		public void AddCalc(Object sender, EventArgs e)
 		{
-			int plus = (Int32.Parse(number1.Text) + Int32.Parse(number2.Text));
-			result.Text = plus.ToString();
+			var add = (Int32.Parse(_number1.Text) + Int32.Parse(_number2.Text));
+			_result.Text = add.ToString();
 		}
 
-		public void minus_calc(Object sender, EventArgs e)
+		public void MinusCalc(Object sender, EventArgs e)
 		{
-			int subtract = (Int32.Parse(number1.Text) - Int32.Parse(number2.Text));
-			result.Text = subtract.ToString();
+			var subtract = (Int32.Parse(_number1.Text) - Int32.Parse(_number2.Text));
+			_result.Text = subtract.ToString();
 		}
 
-		public void multiply_calc(Object sender, EventArgs e)
+		public void MultiplyCalc(Object sender, EventArgs e)
 		{
-			int multiply = (Int32.Parse(number1.Text) * Int32.Parse(number2.Text));
-			result.Text = multiply.ToString();
+			var multiply = (Int32.Parse(_number1.Text) * Int32.Parse(_number2.Text));
+			_result.Text = multiply.ToString();
 		}
 
-		public void divide_calc(Object sender, EventArgs e)
+		public void DivideCalc(Object sender, EventArgs e)
 		{
-			int divide = (Int32.Parse(number1.Text) / Int32.Parse(number2.Text));
-			result.Text = divide.ToString();
+			var divide = (Int32.Parse(_number1.Text) / Int32.Parse(_number2.Text));
+			_result.Text = divide.ToString();
 		}
 
+		public void Clear(Object sender, EventArgs e)
+		{
+			_number1.Text = null;
+			_number2.Text = null;
+		}
 		public override void DidReceiveMemoryWarning()
 		{
 			base.DidReceiveMemoryWarning();
 			// Release any cached data, images, etc that aren't in use.
 		}
+
 		private void SetTextNum1()
 		{
-			var rect = new CGRect(10, 50, 50, 30);
+			var rect = new CGRect(10, 50, 300, 30);
 
-			number1 = new UITextField(rect);
-			number1.BorderStyle = UITextBorderStyle.Line;
+			_number1 = new UITextField(rect);
+			_number1.BorderStyle = UITextBorderStyle.Line;
 
-			View.Add(number1);
+
+			View.Add(_number1);
 		}
 
 		private void SetTextNum2()
 		{
-			var rect = new CGRect(10, 90, 50, 30);
+			var rect = new CGRect(10, 90, 300, 30);
 
-			number2 = new UITextField(rect);
-			number2.BorderStyle = UITextBorderStyle.Line;
+			_number2 = new UITextField(rect);
+			_number2.BorderStyle = UITextBorderStyle.Line;
 
-			View.Add(number2);
+			View.Add(_number2);
 		}
 
-		private void SetAdd()
+		public void SetAdd()
 		{
-			var rect = new CGRect(10, 150, 20, 30);
+			var rect1 = new CGRect(230, 400, 75, 150);
 
-			Plus = new UIButton(rect);
-			Plus.SetTitle("+", UIControlState.Normal);
-			Plus.SetTitleColor(UIColor.Black, UIControlState.Normal);
+			_plus = new UIButton(rect1);
+			_plus.Layer.BorderWidth = 1;
+			_plus.Layer.CornerRadius = 5;
+			_plus.Layer.BackgroundColor = UIColor.Orange.CGColor;
 
-			View.Add(Plus);
+			_plus.SetTitle("+", UIControlState.Normal);
+			_plus.SetTitleColor(UIColor.Black, UIControlState.Normal);
+
+			View.AddSubview(_plus);
+		}
+
+		public void SetupButtonBorder(UIButton btn)
+		{
+			btn.Layer.BorderWidth = _borderWidth;
+			btn.Layer.BorderWidth = _cornerRadius;
+			btn.Layer.BorderColor = _buttonBackgroundColor;
 		}
 
 		private void SetMinus()
 		{
-			var rect = new CGRect(50, 150, 20, 30);
+			var rect = new CGRect(230, 300, 75, 100);
 
-			Minus = new UIButton(rect);
-			Minus.SetTitle("-", UIControlState.Normal);
-			Minus.SetTitleColor(UIColor.Black, UIControlState.Normal);
+			_minus = new UIButton(rect);
+			_minus.Layer.BorderWidth = 1;
+			_minus.Layer.CornerRadius = 5;
+			_minus.Layer.BackgroundColor = UIColor.Orange.CGColor;
 
-			View.Add(Minus);
+			_minus.SetTitle("-", UIControlState.Normal);
+			_minus.SetTitleColor(UIColor.Black, UIControlState.Normal);
+
+			View.Add(_minus);
 		}
 
 		private void SetMultiply()
 		{
-			var rect = new CGRect(90, 150, 20, 30);
+			var rect = new CGRect(155, 425, 75, 125);
 
-			Multiply = new UIButton(rect);
-			Multiply.SetTitle("*", UIControlState.Normal);
-			Multiply.SetTitleColor(UIColor.Black, UIControlState.Normal);
+			_multiply = new UIButton(rect);
+			_multiply.SetTitle("*", UIControlState.Normal);
+			_multiply.SetTitleColor(UIColor.Black, UIControlState.Normal);
 
-			View.Add(Multiply);
+			_multiply.Layer.BorderWidth = 1;
+			_multiply.Layer.CornerRadius = 5;
+			_multiply.Layer.BackgroundColor = UIColor.Orange.CGColor;
+
+			View.Add(_multiply);
 		}
 
 		private void SetDivide()
 		{
-			var rect = new CGRect(130, 150, 20, 30);
+			var rect = new CGRect(155, 300, 75, 125);
 
-			Divide = new UIButton(rect);
-			Divide.SetTitle("/", UIControlState.Normal);
-			Divide.SetTitleColor(UIColor.Black, UIControlState.Normal);
+			_divide = new UIButton(rect);
+			_divide.SetTitle("/", UIControlState.Normal);
+			_divide.SetTitleColor(UIColor.Black, UIControlState.Normal);
 
-			View.Add(Divide);
+			_divide.Layer.BorderWidth = 1;
+			_divide.Layer.CornerRadius = 5;
+			_divide.Layer.BackgroundColor = UIColor.Orange.CGColor;
+
+			View.Add(_divide);
+		}
+
+		private void SetClear()
+		{
+			var rect = new CGRect(155, 225, 150, 75);
+
+			_clear = new UIButton(rect);
+			_clear.SetTitle("Clear", UIControlState.Normal);
+			_clear.SetTitleColor(UIColor.Black, UIControlState.Normal);
+
+			_clear.Layer.BorderWidth = 1;
+			_clear.Layer.CornerRadius = 5;
+			_clear.Layer.BackgroundColor = UIColor.Orange.CGColor;
+
+			View.Add(_clear);
 		}
 
 		private void SetResult()
 		{
 			var rect = new CGRect(10, 190, 100, 30);
 
-			result = new UILabel(rect);
+			_result = new UILabel(rect);
 
-			result.TextColor = UIColor.Black;
-			result.Text = "hello";
+			_result.TextColor = UIColor.Black;
+			_result.Text = "hello";
 
 
-			View.Add(result);
+			View.Add(_result);
 		}
 	}
 }
