@@ -43,11 +43,8 @@ namespace Calculation
 
 		private void AddContent(Object sender, EventArgs e)
 		{
-			string[] add = new string[4];
-			add[0] = (" ");
-			add[1] = (" ");
-			add[2] = (" ");
-			add[3] = (" ");
+			string[] add = new string[1];
+			add[0] = ("a");
 
 			random.AddRange(add);
 
@@ -62,7 +59,7 @@ namespace Calculation
 			var rect = new CGRect(10, 150, 300, 30);
 
 			_listButton = new UIButton(rect);
-			_listButton.SetTitle("Add content", UIControlState.Normal);
+			_listButton.SetTitle("Basic list on label", UIControlState.Normal);
 			_listButton.Layer.BackgroundColor = UIColor.LightGray.CGColor;
 			_listButton.Layer.CornerRadius = 5;
 

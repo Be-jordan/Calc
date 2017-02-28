@@ -51,14 +51,14 @@ namespace Calculation
 
 		public void SetNameButton()
 		{
-			var rect1 = new CGRect(230, 400, 75, 150);
+			var rect1 = new CGRect(75, 400, 300, 30);
 
 			_combine = new UIButton(rect1);
 			_combine.Layer.BorderWidth = 1;
 			_combine.Layer.CornerRadius = 5;
 			_combine.Layer.BackgroundColor = UIColor.Orange.CGColor;
 
-			_combine.SetTitle("+", UIControlState.Normal);
+			_combine.SetTitle("Combine names", UIControlState.Normal);
 			_combine.SetTitleColor(UIColor.Black, UIControlState.Normal);
 
 			View.AddSubview(_combine);
