@@ -24,8 +24,6 @@ namespace Calculation
 		private const int _borderWidth = 1;
 		private const int _cornerRadius = 3;
 
-		CalculatorView view;
-
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();

@@ -6,9 +6,12 @@ namespace Calculation
 {
 	public class CalcViewController : UIViewController
 	{
-		private UIButton _navCalc;
+		private UIButton _navToCalc;
+		private UIButton _navToName;
 
 		CalculatorController calculatorController;
+
+		NameController nameController;
 
 		public CalcViewController()
 		{
@@ -22,8 +25,16 @@ namespace Calculation
 			Title = "Calculation";
 
 			SetUpNavCalcButton();
+			SetUpNavNameButton();
 
-			_navCalc.TouchUpInside += NavToCalculator;
+			_navToCalc.TouchUpInside += NavToCalculator;
+			_navToName.TouchUpInside += NavToName;
+		}
+
+		public void NavToName(object sender, EventArgs e)
+		{
+			nameController = new NameController();
+			this.NavigationController.PushViewController(nameController, true);
 		}
 
 		public void NavToCalculator(Object sender, EventArgs e)
@@ -34,7 +45,22 @@ namespace Calculation
 
 		private void SetUpNavCalcButton()
 		{
-			var rect = new CGRect(20, 200, 280, 44);  			_navCalc = new UIButton(rect); 			_navCalc.SetTitle("Calculator Sample", UIControlState.Normal); 			_navCalc.SetTitleColor(UIColor.Black, UIControlState.Normal);  			_navCalc.Layer.BorderWidth = 1; 			_navCalc.Layer.CornerRadius = 5; 			_navCalc.Layer.BackgroundColor = UIColor.LightGray.CGColor;  			View.Add(_navCalc);
+			var rect = new CGRect(20, 200, 280, 44);  			_navToCalc = new UIButton(rect); 			_navToCalc.SetTitle("Calculator Sample", UIControlState.Normal); 			_navToCalc.SetTitleColor(UIColor.Black, UIControlState.Normal);  			_navToCalc.Layer.BorderWidth = 1; 			_navToCalc.Layer.CornerRadius = 5; 			_navToCalc.Layer.BackgroundColor = UIColor.LightGray.CGColor;  			View.Add(_navToCalc);
+		}
+
+		private void SetUpNavNameButton()
+		{
+			var rect = new CGRect(20, 250, 280, 44);
+
+			_navToName = new UIButton(rect);
+			_navToName.SetTitle("Combine Name Sample", UIControlState.Normal);
+			_navToName.SetTitleColor(UIColor.Black, UIControlState.Normal);
+
+			_navToName.Layer.BorderWidth = 1;
+			_navToName.Layer.CornerRadius = 5;
+			_navToName.Layer.BackgroundColor = UIColor.LightGray.CGColor;
+
+			View.Add(_navToName);
 		}
 	}
 }

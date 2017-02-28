@@ -109,6 +109,8 @@
     <Compile Include="View\CalculatorView.cs" />
     <Compile Include="ViewControl\CalculatorController.cs" />
     <Compile Include="ViewControl\CalcViewController.cs" />
+    <Compile Include="ViewControl\NameController.cs" />
+    <Compile Include="View\NameView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
