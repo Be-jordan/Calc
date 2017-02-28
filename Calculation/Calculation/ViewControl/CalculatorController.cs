@@ -76,7 +76,7 @@ namespace Calculation
 
 		public void DivideCalc(Object sender, EventArgs e)
 		{
-			var divide = (Int32.Parse(_number1.Text) / Int32.Parse(_number2.Text));
+			var divide = divideToFloat();
 			_result.Text = divide.ToString();
 		}
 
@@ -89,6 +89,16 @@ namespace Calculation
 		{
 			base.DidReceiveMemoryWarning();
 			// Release any cached data, images, etc that aren't in use.
+		}
+
+		private float divideToFloat()
+		{
+			var x = (Int32.Parse(_number1.Text));
+			var y = (Int32.Parse(_number2.Text));
+
+			float z = (float)x / (float)y;
+
+			return z;
 		}
 
 		private void SetTextNum1()
