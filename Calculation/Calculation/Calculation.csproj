@@ -96,10 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="LaunchScreen.storyboard" />
-    <InterfaceDefinition Include="Main.storyboard" />
+    <Folder Include="ViewControl\" />
+    <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -108,10 +106,9 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
+    <Compile Include="View\CalculatorView.cs" />
+    <Compile Include="ViewControl\CalculatorController.cs" />
+    <Compile Include="ViewControl\CalcViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

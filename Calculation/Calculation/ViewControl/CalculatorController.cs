@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using CoreGraphics;
 using System.Drawing;
 using UIKit;
@@ -6,7 +6,7 @@ using CoreGraphics;
 
 namespace Calculation
 {
-	public partial class ViewController : UIViewController
+	public partial class CalculatorController : UIViewController
 	{
 		private UITextField _number1;
 		private UITextField _number2;
@@ -24,14 +24,17 @@ namespace Calculation
 		private const int _borderWidth = 1;
 		private const int _cornerRadius = 3;
 
-		protected ViewController(IntPtr handle) : base(handle)
-		{
-			// Note: this .ctor should not contain any initialization logic.
-		}
+		CalculatorView view;
 
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+
+			View.BackgroundColor = UIColor.White;
+			Title = "Calculator";
+
+			//view = new CalculatorView();
+			//View = view;
 
 			SetTextNum1();
 			SetTextNum2();
@@ -90,7 +93,7 @@ namespace Calculation
 
 		private void SetTextNum1()
 		{
-			var rect = new CGRect(10, 50, 300, 30);
+			var rect = new CGRect(10, 90, 300, 30);
 
 			_number1 = new UITextField(rect);
 			_number1.BorderStyle = UITextBorderStyle.Line;
@@ -101,7 +104,7 @@ namespace Calculation
 
 		private void SetTextNum2()
 		{
-			var rect = new CGRect(10, 90, 300, 30);
+			var rect = new CGRect(10, 130, 300, 30);
 
 			_number2 = new UITextField(rect);
 			_number2.BorderStyle = UITextBorderStyle.Line;
@@ -205,3 +208,4 @@ namespace Calculation
 		}
 	}
 }
+
