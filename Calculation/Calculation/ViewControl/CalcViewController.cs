@@ -8,10 +8,13 @@ namespace Calculation
 	{
 		private UIButton _navToCalc;
 		private UIButton _navToName;
+		private UIButton _navToList;
 
 		CalculatorController calculatorController;
 
 		NameController nameController;
+
+		ListViewController listController;
 
 		public CalcViewController()
 		{
@@ -26,9 +29,11 @@ namespace Calculation
 
 			SetUpNavCalcButton();
 			SetUpNavNameButton();
+			SetUpNavListButton();
 
 			_navToCalc.TouchUpInside += NavToCalculator;
 			_navToName.TouchUpInside += NavToName;
+			_navToList.TouchUpInside += NavToList;
 		}
 
 		public void NavToName(object sender, EventArgs e)
@@ -41,6 +46,12 @@ namespace Calculation
 		{
 			calculatorController = new CalculatorController();
 			this.NavigationController.PushViewController(calculatorController, true);
+		}
+
+		public void NavToList(Object sender, EventArgs e)
+		{
+			listController = new ListViewController();
+			this.NavigationController.PushViewController(listController, true);
 		}
 
 		private void SetUpNavCalcButton()
@@ -61,6 +72,21 @@ namespace Calculation
 			_navToName.Layer.BackgroundColor = UIColor.LightGray.CGColor;
 
 			View.Add(_navToName);
+		}
+
+		private void SetUpNavListButton()
+		{
+			var rect = new CGRect(20, 300, 280, 44);
+
+			_navToList = new UIButton(rect);
+			_navToList.SetTitle("List Sample", UIControlState.Normal);
+			_navToList.SetTitleColor(UIColor.Black, UIControlState.Normal);
+
+			_navToList.Layer.BorderWidth = 1;
+			_navToList.Layer.CornerRadius = 5;
+			_navToList.Layer.BackgroundColor = UIColor.LightGray.CGColor;
+
+			View.Add(_navToList);
 		}
 	}
 }
