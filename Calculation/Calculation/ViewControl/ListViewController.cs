@@ -8,8 +8,9 @@ namespace Calculation
 	public class ListViewController : UIViewController
 	{
 		private List<string> random = new List<string>();
+
 		private UIButton _listButton;
-		private UILabel _listView;
+		private UITextField _listView;
 
 		public ListViewController()
 		{
@@ -22,13 +23,13 @@ namespace Calculation
 			View.BackgroundColor = UIColor.White;
 			Title = "List samples";
 
-			SetListView();
-			SetListButton();
+			SetListStringView();
+			SetListStringButton();
 
-			_listButton.TouchUpInside += AddContent;
+			_listButton.TouchUpInside += AddStringContent;
 		}
 
-		public List<string> SetList()
+		private void AddStringContent(Object sender, EventArgs e)
 		{
 			random.Add("Hi");
 			random.Add("there");
@@ -38,25 +39,12 @@ namespace Calculation
 			random.Add("you");
 			random.Add("?");
 
-			return random;
+			_listView.Text = string.Join(Environment.NewLine, random);
 		}
 
-		private void AddContent(Object sender, EventArgs e)
+		public void SetListStringButton()
 		{
-			string[] add = new string[1];
-			add[0] = ("a");
-
-			random.AddRange(add);
-
-			foreach (string i in random)
-			{
-				_listView.Text = string.Format(i, UIControlState.Normal);
-			}
-		}
-
-		public void SetListButton()
-		{
-			var rect = new CGRect(10, 150, 300, 30);
+			var rect = new CGRect(10, 300, 300, 30);
 
 			_listButton = new UIButton(rect);
 			_listButton.SetTitle("Basic list on label", UIControlState.Normal);
@@ -66,21 +54,19 @@ namespace Calculation
 			View.Add(_listButton);
 		}
 
-		public void SetListView()
+		public void SetListStringView()
 		{
 			var rect = new CGRect(10, 90, 300, 30);
 
-			_listView = new UILabel(rect);
+			_listView = new UITextField(rect);
 			_listView.Text = "Hello";
 			_listView.TextColor = UIColor.Black;
+			_listView.BorderStyle = UITextBorderStyle.Line;
+			_listView.Layer.BorderColor = UIColor.Black.CGColor;
 
 			View.Add(_listView);
 		}
 
-		public class RandomString
-		{
-			public string random { get; set; }
-		}
 
 	}
 }
