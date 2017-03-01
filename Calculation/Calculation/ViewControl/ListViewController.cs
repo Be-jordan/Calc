@@ -11,10 +11,16 @@ namespace Calculation
 
 		private List<int> intList = new List<int>();
 
+
 		private UIButton _listButton;
 		private UIButton _listIntButton;
+		private UIButton _listClassButton;
+
 		private UITextField _listStringView;
 		private UITextField _listIntView;
+		private UITextField _listClassView;
+
+
 
 		public ListViewController()
 		{
@@ -27,13 +33,16 @@ namespace Calculation
 			View.BackgroundColor = UIColor.White;
 			Title = "List samples";
 
-			SetListStringView();
 			SetListStringButton();
-			SetListIntView();
+			SetListClassButton();
 			SetListIntButton();
+			SetListIntView();
+			SetListStringView();
+			SetListClassView();
 
 			_listButton.TouchUpInside += AddStringContent;
 			_listIntButton.TouchUpInside += AddIntContent;
+			_listClassButton.TouchUpInside += AddClassContent;
 		}
 
 		private void AddStringContent(Object sender, EventArgs e)
@@ -49,6 +58,17 @@ namespace Calculation
 			_listStringView.Text = string.Join(Environment.NewLine, random);
 		}
 
+		private void AddClassContent(object sender, EventArgs e)
+		{
+			List<Name> list = new List<Name>();
+
+			list.Add(new Name() { firstName = "john" });
+
+			_listClassView.Text = string.Join(Environment.NewLine, list);
+		}
+
+
+
 		private void AddIntContent(Object sender, EventArgs e)
 		{
 			intList.Add(1);
@@ -60,9 +80,21 @@ namespace Calculation
 			_listIntView.Text = string.Join(Environment.NewLine, intList);
 		}
 
+		public void SetListClassButton()
+		{
+			var rect = new CGRect(10, 450, 300, 30);
+
+			_listClassButton = new UIButton(rect);
+			_listClassButton.SetTitle("Basic list on label", UIControlState.Normal);
+			_listClassButton.Layer.BackgroundColor = UIColor.LightGray.CGColor;
+			_listClassButton.Layer.CornerRadius = 5;
+
+			View.Add(_listClassButton);
+		}
+
 		public void SetListStringButton()
 		{
-			var rect = new CGRect(10, 300, 300, 30);
+			var rect = new CGRect(10, 400, 300, 30);
 
 			_listButton = new UIButton(rect);
 			_listButton.SetTitle("Basic list on label", UIControlState.Normal);
@@ -108,6 +140,19 @@ namespace Calculation
 			_listStringView.Layer.BorderColor = UIColor.Black.CGColor;
 
 			View.Add(_listStringView);
+		}
+
+		public void SetListClassView()
+		{
+			var rect = new CGRect(10, 170, 300, 30);
+
+			_listClassView = new UITextField(rect);
+			_listClassView.Text = "Hello";
+			_listClassView.TextColor = UIColor.Black;
+			_listClassView.BorderStyle = UITextBorderStyle.Line;
+			_listClassView.Layer.BorderColor = UIColor.Black.CGColor;
+
+			View.Add(_listClassView);
 		}
 
 

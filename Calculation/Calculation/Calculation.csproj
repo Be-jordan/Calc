@@ -98,6 +98,7 @@
     <Folder Include="Resources\" />
     <Folder Include="ViewControl\" />
     <Folder Include="View\" />
+    <Folder Include="List\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -113,6 +114,7 @@
     <Compile Include="View\NameView.cs" />
     <Compile Include="View\ListView.cs" />
     <Compile Include="ViewControl\ListViewController.cs" />
+    <Compile Include="List\ListClass.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
