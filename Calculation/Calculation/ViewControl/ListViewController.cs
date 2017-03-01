@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CoreGraphics;
+using Foundation;
 using UIKit;
 
 namespace Calculation
@@ -11,16 +12,16 @@ namespace Calculation
 
 		private List<int> intList = new List<int>();
 
-
 		private UIButton _listButton;
 		private UIButton _listIntButton;
 		private UIButton _listClassButton;
+		private UIButton _listTableStringButton;
 
-		private UITextField _listStringView;
+		private UITableView _listStringView;
 		private UITextField _listIntView;
 		private UITextField _listClassView;
 
-
+		TableViewStringController tableViewController;
 
 		public ListViewController()
 		{
@@ -37,12 +38,20 @@ namespace Calculation
 			SetListClassButton();
 			SetListIntButton();
 			SetListIntView();
-			SetListStringView();
+			//SetListStringView();
 			SetListClassView();
+			SetListTableStringButton();
 
 			_listButton.TouchUpInside += AddStringContent;
 			_listIntButton.TouchUpInside += AddIntContent;
 			_listClassButton.TouchUpInside += AddClassContent;
+			_listTableStringButton.TouchUpInside += NavToStringList;
+		}
+
+		public void NavToStringList(object sender, EventArgs e)
+		{
+			tableViewController = new TableViewStringController();
+			this.NavigationController.PushViewController(tableViewController, true);
 		}
 
 		private void AddStringContent(Object sender, EventArgs e)
@@ -55,7 +64,22 @@ namespace Calculation
 			random.Add("you");
 			random.Add("?");
 
-			_listStringView.Text = string.Join(Environment.NewLine, random);
+			foreach (string value in random)
+			{
+				_listStringView.Add(_listClassView);
+			}
+		}
+
+		public void SetListTableStringButton()
+		{
+			var rect = new CGRect(10, 550, 300, 30);
+
+			_listTableStringButton = new UIButton(rect);
+			_listTableStringButton.SetTitle("Basic list on label", UIControlState.Normal);
+			_listTableStringButton.Layer.BackgroundColor = UIColor.LightGray.CGColor;
+			_listTableStringButton.Layer.CornerRadius = 5;
+
+			View.Add(_listTableStringButton);
 		}
 
 		private void AddClassContent(object sender, EventArgs e)
@@ -66,8 +90,6 @@ namespace Calculation
 
 			_listClassView.Text = string.Join(Environment.NewLine, list);
 		}
-
-
 
 		private void AddIntContent(Object sender, EventArgs e)
 		{
@@ -129,18 +151,50 @@ namespace Calculation
 			View.Add(_listIntView);
 		}
 
-		public void SetListStringView()
+		public class TableSource : UITableViewSource
 		{
-			var rect = new CGRect(10, 90, 300, 30);
 
-			_listStringView = new UITextField(rect);
-			_listStringView.Text = "Hello";
-			_listStringView.TextColor = UIColor.Black;
-			_listStringView.BorderStyle = UITextBorderStyle.Line;
-			_listStringView.Layer.BorderColor = UIColor.Black.CGColor;
+			string[] TableItems;
+			string CellIdentifier = "TableCell";
 
-			View.Add(_listStringView);
+			public TableSource(string[] items)
+			{
+				TableItems = items;
+			}
+
+			public override nint RowsInSection(UITableView tableview, nint section)
+			{
+				return TableItems.Length;
+			}
+
+			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+			{
+				UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
+				string item = TableItems[indexPath.Row];
+
+				//---- if there are no cells to reuse, create a new one
+				if (cell == null)
+				{ cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier); }
+
+				cell.TextLabel.Text = item;
+
+				return cell;
+			}
+
+
 		}
+
+		//public void SetListStringView()
+		//{
+
+
+		//	var rect = new CGRect(10, 90, 300, 30);
+
+
+
+
+		//	View.Add(_listStringView);
+		//}
 
 		public void SetListClassView()
 		{
@@ -152,9 +206,9 @@ namespace Calculation
 			_listClassView.BorderStyle = UITextBorderStyle.Line;
 			_listClassView.Layer.BorderColor = UIColor.Black.CGColor;
 
+
+
 			View.Add(_listClassView);
 		}
-
-
 	}
 }

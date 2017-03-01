@@ -115,6 +115,8 @@
     <Compile Include="View\ListView.cs" />
     <Compile Include="ViewControl\ListViewController.cs" />
     <Compile Include="List\ListClass.cs" />
+    <Compile Include="ViewControl\TableViewStringController.cs" />
+    <Compile Include="View\TableStringView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
