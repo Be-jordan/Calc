@@ -9,12 +9,15 @@ namespace Calculation
 		private UIButton _navToCalc;
 		private UIButton _navToName;
 		private UIButton _navToList;
+		private UIButton _navToRandom;
 
 		CalculatorController calculatorController;
 
 		NameController nameController;
 
 		ListViewController listController;
+
+		RandomViewController randomController;
 
 		public CalcViewController()
 		{
@@ -30,10 +33,12 @@ namespace Calculation
 			SetUpNavCalcButton();
 			SetUpNavNameButton();
 			SetUpNavListButton();
+			SetUpNavRandomButton();
 
 			_navToCalc.TouchUpInside += NavToCalculator;
 			_navToName.TouchUpInside += NavToName;
 			_navToList.TouchUpInside += NavToList;
+			_navToRandom.TouchUpInside += NavToRandom;
 		}
 
 		public void NavToName(object sender, EventArgs e)
@@ -52,6 +57,12 @@ namespace Calculation
 		{
 			listController = new ListViewController();
 			this.NavigationController.PushViewController(listController, true);
+		}
+
+		public void NavToRandom(Object sender, EventArgs e)
+		{
+			randomController = new RandomViewController();
+			this.NavigationController.PushViewController(randomController, true);
 		}
 
 		private void SetUpNavCalcButton()
@@ -87,6 +98,21 @@ namespace Calculation
 			_navToList.Layer.BackgroundColor = UIColor.LightGray.CGColor;
 
 			View.Add(_navToList);
+		}
+
+		private void SetUpNavRandomButton()
+		{
+			var rect = new CGRect(20, 350, 280, 44);
+
+			_navToRandom = new UIButton(rect);
+			_navToRandom.SetTitle("Random String sample", UIControlState.Normal);
+			_navToRandom.SetTitleColor(UIColor.Black, UIControlState.Normal);
+
+			_navToRandom.Layer.BorderWidth = 1;
+			_navToRandom.Layer.CornerRadius = 5;
+			_navToRandom.Layer.BackgroundColor = UIColor.LightGray.CGColor;
+
+			View.Add(_navToRandom);
 		}
 	}
 }
