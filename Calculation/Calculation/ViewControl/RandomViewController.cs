@@ -9,8 +9,13 @@ namespace Calculation
 	{
 		private static Random random = new Random();
 
+		private string ran = RandomString(12);
+
 		private UILabel _randomLabel;
 		private UIButton _randomButton;
+		private UIButton _verifyButton;
+		private UITextField _verifyTextField;
+		private UILabel _verify;
 
 		private static string RandomString(int length)
 		{
@@ -29,16 +34,31 @@ namespace Calculation
 
 			SetUpTextRandom();
 			SetUpTextButton();
+			SetUpVerifyLabel();
+			SetUpVerifyText();
+			SetUpVerifyButton();
 
 			_randomButton.TouchUpInside += Randomise;
-
+			_verifyButton.TouchUpInside += verify;
 		}
 
 		public void Randomise(Object sender, EventArgs e)
 		{
-			string ran = RandomString(12);
-
 			_randomLabel.Text = ran;
+		}
+
+		public void verify(Object sender, EventArgs e)
+		{
+			string ver = _randomLabel.Text.ToString();
+
+			if (_verifyTextField.Text.Equals(_randomLabel.Text, StringComparison.CurrentCultureIgnoreCase))
+			{
+				_verify.Text = "Verified";
+			}
+			else
+			{
+				_verify.Text = "wrong code";
+			}
 		}
 
 		public void SetUpTextButton()
@@ -55,6 +75,20 @@ namespace Calculation
 			View.Add(_randomButton);
 		}
 
+		public void SetUpVerifyButton()
+		{
+			var rect = new CGRect(10, 650, 300, 30);
+
+			_verifyButton = new UIButton(rect);
+
+			_verifyButton.SetTitle("Verify", UIControlState.Normal);
+			_verifyButton.Layer.BackgroundColor = UIColor.DarkGray.CGColor;
+			_verifyButton.Layer.BorderWidth = 1;
+			_verifyButton.Layer.CornerRadius = 5;
+
+			View.Add(_verifyButton);
+		}
+
 		public void SetUpTextRandom()
 		{
 			var rect = new CGRect(10, 300, 300, 30);
@@ -66,6 +100,32 @@ namespace Calculation
 			_randomLabel.Layer.CornerRadius = 5;
 
 			View.Add(_randomLabel);
+		}
+
+		public void SetUpVerifyLabel()
+		{
+			var rect = new CGRect(10, 450, 300, 30);
+
+			_verify = new UILabel(rect);
+			_verify.Text = " ";
+			_verify.TextColor = UIColor.Black;
+			_verify.Layer.BorderWidth = 1;
+			_verify.Layer.CornerRadius = 5;
+
+			View.Add(_verify);
+		}
+
+		public void SetUpVerifyText()
+		{
+			var rect = new CGRect(10, 550, 300, 30);
+
+			_verifyTextField = new UITextField(rect);
+			_verifyTextField.Text = null;
+			_verifyTextField.TextColor = UIColor.Black;
+			_verifyTextField.Layer.BorderWidth = 1;
+			_verifyTextField.Layer.CornerRadius = 5;
+
+			View.Add(_verifyTextField);
 		}
 	}
 }
