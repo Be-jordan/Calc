@@ -99,6 +99,7 @@
     <Folder Include="ViewControl\" />
     <Folder Include="View\" />
     <Folder Include="List\" />
+    <Folder Include="Numbers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -119,6 +120,7 @@
     <Compile Include="View\TableStringView.cs" />
     <Compile Include="ViewControl\RandomViewController.cs" />
     <Compile Include="View\RandomView.cs" />
+    <Compile Include="Numbers\Numbers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

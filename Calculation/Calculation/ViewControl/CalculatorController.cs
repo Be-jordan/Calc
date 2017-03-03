@@ -81,16 +81,22 @@ namespace Calculation
 			_number1.Text = null;
 			_number2.Text = null;
 		}
+
 		public override void DidReceiveMemoryWarning()
 		{
 			base.DidReceiveMemoryWarning();
 			// Release any cached data, images, etc that aren't in use.
 		}
 
+
 		private float divideToFloat()
 		{
-			var x = (Int32.Parse(_number1.Text));
-			var y = (Int32.Parse(_number2.Text));
+			Numbers number;
+
+			number = new Numbers();
+
+			var x = Convert.ToInt32(number.FirstNumber.ToString(_number1.Text));
+			var y = Convert.ToInt32(number.SecondNumber.ToString(_number2.Text));
 
 			float z = (float)x / (float)y;
 
