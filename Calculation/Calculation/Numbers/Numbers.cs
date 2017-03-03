@@ -10,6 +10,8 @@ namespace Calculation
 
 		public Numbers()
 		{
+			firstNumber = FirstNumber;
+			secondNumber = SecondNumber;
 		}
 
 		public int FirstNumber

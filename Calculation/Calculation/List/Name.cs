@@ -7,11 +7,12 @@ namespace Calculation
 	{
 		public string firstName;
 
+		public string lastName;
+
 		public override string ToString()
 		{
 			return firstName;
 		}
-
 
 	}
 }

@@ -115,7 +115,7 @@
     <Compile Include="View\NameView.cs" />
     <Compile Include="View\ListView.cs" />
     <Compile Include="ViewControl\ListViewController.cs" />
-    <Compile Include="List\ListClass.cs" />
+    <Compile Include="List\Name.cs" />
     <Compile Include="ViewControl\TableViewStringController.cs" />
     <Compile Include="View\TableStringView.cs" />
     <Compile Include="ViewControl\RandomViewController.cs" />

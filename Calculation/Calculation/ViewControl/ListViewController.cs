@@ -206,8 +206,6 @@ namespace Calculation
 			_listClassView.BorderStyle = UITextBorderStyle.Line;
 			_listClassView.Layer.BorderColor = UIColor.Black.CGColor;
 
-
-
 			View.Add(_listClassView);
 		}
 	}

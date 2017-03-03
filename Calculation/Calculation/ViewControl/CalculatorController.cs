@@ -54,19 +54,19 @@ namespace Calculation
 
 		public void AddCalc(Object sender, EventArgs e)
 		{
-			var add = (Int32.Parse(_number1.Text) + Int32.Parse(_number2.Text));
+			var add = addToFloat();
 			_result.Text = add.ToString();
 		}
 
 		public void MinusCalc(Object sender, EventArgs e)
 		{
-			var subtract = (Int32.Parse(_number1.Text) - Int32.Parse(_number2.Text));
+			var subtract = subtractToFloat();
 			_result.Text = subtract.ToString();
 		}
 
 		public void MultiplyCalc(Object sender, EventArgs e)
 		{
-			var multiply = (Int32.Parse(_number1.Text) * Int32.Parse(_number2.Text));
+			var multiply = multiplyToFloat();
 			_result.Text = multiply.ToString();
 		}
 
@@ -88,7 +88,6 @@ namespace Calculation
 			// Release any cached data, images, etc that aren't in use.
 		}
 
-
 		private float divideToFloat()
 		{
 			Numbers number;
@@ -99,6 +98,46 @@ namespace Calculation
 			var y = Convert.ToInt32(number.SecondNumber.ToString(_number2.Text));
 
 			float z = (float)x / (float)y;
+
+			return z;
+		}
+
+		private float subtractToFloat()
+		{
+			Numbers number;
+
+			number = new Numbers();
+
+			var x = Convert.ToInt32(number.FirstNumber.ToString(_number1.Text));
+			var y = Convert.ToInt32(number.SecondNumber.ToString(_number2.Text));
+
+			float z = (float)x - (float)y;
+
+			return z;
+		}
+
+		private float addToFloat()
+		{
+			Numbers number;
+			number = new Numbers();
+
+			var x = Convert.ToInt32(number.FirstNumber.ToString(_number2.Text));
+			var y = Convert.ToInt32(number.SecondNumber.ToString(_number2.Text));
+
+			float z = (float)x + (float)y;
+
+			return z;
+		}
+
+		private float multiplyToFloat()
+		{
+			Numbers number;
+			number = new Numbers();
+
+			var x = Convert.ToInt32(number.FirstNumber.ToString(_number2.Text));
+			var y = Convert.ToInt32(number.SecondNumber.ToString(_number2.Text));
+
+			float z = (float)x * (float)y;
 
 			return z;
 		}
